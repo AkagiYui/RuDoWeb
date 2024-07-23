@@ -92,12 +92,7 @@
     <div id="root">
       <div class="loading-container" id="loading-container">
         <div id="loading">
-          <svg
-            fill="#ccc"
-            class="animate-spin"
-            viewBox="0 0 200 200"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+          <svg fill="#ccc" class="animate-spin" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
             <circle
               fill="none"
               stroke-width="16"
@@ -112,9 +107,8 @@
           <span class="loading-message" id="loading-message">加载中...</span>
           <script>
             // 如果读取到配置，则使用配置中的颜色模式
-            if (isDarkMode !== undefined) {
-              const loadingContainer =
-                document.getElementById("loading-container")
+            if (typeof isDarkMode !== "undefined") {
+              const loadingContainer = document.getElementById("loading-container")
               const loadingMessage = document.getElementById("loading-message")
               if (isDarkMode === true) {
                 loadingContainer.classList.add("loading-container-dark")
