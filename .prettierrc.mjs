@@ -1,5 +1,7 @@
 /** @type {import("prettier").Config} */
 const config = {
+  "plugins": ["@trivago/prettier-plugin-sort-imports"],
+
   printWidth: 120, // 每行字符数
   tabWidth: 2, // 缩进空格数
   useTabs: false, // 使用tab缩进
@@ -12,10 +14,13 @@ const config = {
   bracketSameLine: false, // 将多行 HTML（HTML、JSX、Vue、Angular）元素的 > 放在最后一行的末尾，而不是单独放在下一行（不适用于自闭合元素）。
   arrowParens: "always", // 箭头函数参数使用括号
   htmlWhitespaceSensitivity: "css", // 指定 HTML 文件的全局空白区域敏感度
-  vueIndentScriptAndStyle: false, // 是否缩进Vue文件中的脚本和样式标签
   endOfLine: "lf", // 换行符
   embeddedLanguageFormatting: "auto", // 是否格式化嵌入式代码
   singleAttributePerLine: false, // 在 HTML、Vue 和 JSX 中强制每行使用单一属性
+
+  importOrder: ["^@core/(.*)$", "^@server/(.*)$", "^@ui/(.*)$", "^[./]"], // import排序
+  importOrderSeparation: true, // import组分离
+  importOrderSortSpecifiers: true, // import排序规范
 }
 
 export default config
