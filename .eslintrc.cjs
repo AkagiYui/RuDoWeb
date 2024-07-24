@@ -28,6 +28,8 @@ module.exports = {
     "no-undef": "off", // 禁止未声明的变量。已禁用，使用typescript检查
     "no-var": "error", // 禁止使用 var 声明变量
     "@typescript-eslint/no-non-null-assertion": "off", // 禁止非空断言
+    "@typescript-eslint/no-unsafe-assignment": "warn", // 禁止不安全的赋值
+    "@typescript-eslint/restrict-template-expressions": "off", // 限制模板表达式
 
     "simple-import-sort/exports": "error", // 排序导出
     "simple-import-sort/imports": "error", // 排序导入
