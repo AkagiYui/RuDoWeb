@@ -20,7 +20,7 @@ const config = {
 
   importOrder: ["^@core/(.*)$", "^@server/(.*)$", "^@ui/(.*)$", "^[./]"], // import排序
   importOrderSeparation: true, // import组分离
-  importOrderSortSpecifiers: true, // import排序规范
+  importOrderSortSpecifiers: false, // import排序规范
 }
 
 export default config

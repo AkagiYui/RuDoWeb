@@ -24,6 +24,7 @@ module.exports = {
     "object-shorthand": ["off", "consistent"], // 对象字面量简写语法
 
     "no-unused-vars": "off", // 禁止未使用过的变量。已禁用，使用typescript检查
+    "@typescript-eslint/no-unused-vars": "off", // 禁止未使用过的变量。
     "no-undef": "off", // 禁止未声明的变量。已禁用，使用typescript检查
     "no-var": "error", // 禁止使用 var 声明变量
     "@typescript-eslint/no-non-null-assertion": "off", // 禁止非空断言
