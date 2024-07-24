@@ -33,9 +33,9 @@ module.exports = {
 
     "simple-import-sort/exports": "error", // 排序导出
     "simple-import-sort/imports": "error", // 排序导入
-    "import/first": "error", // import语句应该放在文件的顶部
-    "import/newline-after-import": "error", // import语句后要求空行
-    "import/no-duplicates": "error", // 禁止重复导入
+    "import/first": "off", // import语句应该放在文件的顶部
+    "import/newline-after-import": "off", // import语句后要求空行
+    "import/no-duplicates": "off", // 禁止重复导入
     'react-refresh/only-export-components': [ // React组件只能导出函数组件
       'warn',
       { allowConstantExport: true },

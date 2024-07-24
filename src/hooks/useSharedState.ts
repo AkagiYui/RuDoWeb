@@ -28,7 +28,7 @@ const eventSystem = {
   },
 }
 
-export function useSharedState<T>(key: string, initialValue: T, config: SharedStateConfig = {}) {
+function useSharedState<T>(key: string, initialValue: T, config: SharedStateConfig = {}) {
   // 解构配置对象，设置默认值
   const { persist = false, crossTab = false } = config
 
