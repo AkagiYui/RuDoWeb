@@ -1,6 +1,5 @@
-import { fileURLToPath, URL } from "node:url"
-
 import react from "@vitejs/plugin-react-swc"
+import { fileURLToPath, URL } from "node:url"
 import { defineConfig } from "vite"
 
 // https://vitejs.dev/config/

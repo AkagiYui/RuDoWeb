@@ -11,7 +11,7 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:react/jsx-runtime',
   ],
-  ignorePatterns: ['dist', '.eslintrc.cjs'],
+  ignorePatterns: ['dist', '.eslintrc.cjs', "*.css", "*.svg"],
   parser: '@typescript-eslint/parser',
   plugins: ["simple-import-sort", 'react-refresh', "import"],
   rules: {
@@ -32,10 +32,12 @@ module.exports = {
     "@typescript-eslint/restrict-template-expressions": "off", // 限制模板表达式
 
     "simple-import-sort/exports": "error", // 排序导出
-    "simple-import-sort/imports": "error", // 排序导入
-    "import/first": "off", // import语句应该放在文件的顶部
-    "import/newline-after-import": "off", // import语句后要求空行
-    "import/no-duplicates": "off", // 禁止重复导入
+    "simple-import-sort/imports": ["error", {
+      groups: [["^(.*).css$"], ["^[a-z@][^/](.*)$"], ["^@/(.*)$"], ["^[./]"]]
+    }], // 排序导入
+    "import/first": "error", // import语句应该放在文件的顶部
+    "import/newline-after-import": "error", // import语句后要求空行
+    "import/no-duplicates": "error", // 禁止重复导入
     'react-refresh/only-export-components': [ // React组件只能导出函数组件
       'warn',
       { allowConstantExport: true },
@@ -48,4 +50,10 @@ module.exports = {
     project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
     tsconfigRootDir: __dirname,
   },
+  "settings": {
+    "react": {
+"version": "detect", // React version. "detect" automatically picks the version you have installed.
+
+    },
+  }
 }

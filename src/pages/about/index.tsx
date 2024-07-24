@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 
 export default function About() {
-  throw new Error()
+  //throw new Error()
 
   return <>
     <div>About</div>

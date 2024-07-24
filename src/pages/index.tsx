@@ -1,18 +1,26 @@
 import "./index.css"
 
-import { Button } from "@mui/material"
+import { Button, TextField } from "@mui/material"
+import { useEffectOnActive } from "keepalive-for-react"
 import { useNavigate } from "react-router-dom"
 
-import viteLogo from "/vite.svg"
 import ButtonUsage from "@/components/ButtonUsage"
 import Flex from "@/components/Flex"
 import { useCount } from "@/stores"
 
 import reactLogo from "./react.svg"
+import viteLogo from "/vite.svg"
 
 export default function Index() {
   const [countValue, countPlusOne] = useCount()
   const navigate = useNavigate()
+  useEffectOnActive(
+    (active) => {
+      console.log("useOnActive", active)
+    },
+    false,
+    [],
+  )
 
   return (
     <>
@@ -41,6 +49,7 @@ export default function Index() {
         >
           about
         </Button>
+        <TextField id="outlined-basic" label="Outlined" variant="outlined" />
       </Flex>
 
       <p className="read-the-docs">Click on the Vite and React logos to learn more</p>

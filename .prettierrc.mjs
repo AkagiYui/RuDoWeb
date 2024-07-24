@@ -18,9 +18,9 @@ const config = {
   embeddedLanguageFormatting: "auto", // 是否格式化嵌入式代码
   singleAttributePerLine: false, // 在 HTML、Vue 和 JSX 中强制每行使用单一属性
 
-  // importOrder: ["^@core/(.*)$", "^@server/(.*)$", "^@ui/(.*)$", "^[./]"], // import排序
-  // importOrderSeparation: true, // import组分离
-  // importOrderSortSpecifiers: false, // import排序规范
+  importOrder: ["^(.*).css$", "^[a-z@][^/](.*)$", "^@/(.*)$", "^[./]"], // import排序
+  importOrderSeparation: true, // import组分离
+  importOrderSortSpecifiers: true, // import排序规范
 }
 
 export default config
