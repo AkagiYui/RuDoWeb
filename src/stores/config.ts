@@ -13,8 +13,8 @@ export const useCount = () => {
 
 export const useDrawerState = () => {
   const [drawerOpen, setDrawerOpen] = useSharedState("drawerOpen", false)
-  const toggleDrawer = useCallback(() => {
-    setDrawerOpen((prev) => !prev)
+  const toggleDrawer = useCallback((newState?: boolean) => {
+    setDrawerOpen((prev) => (newState === undefined ? !prev : newState))
   }, [setDrawerOpen])
 
   return [drawerOpen, toggleDrawer] as const

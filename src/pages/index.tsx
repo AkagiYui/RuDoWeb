@@ -1,5 +1,6 @@
 import "./index.css"
 
+import { Language, Translate } from "@mui/icons-material"
 import { Button, TextField } from "@mui/material"
 import { useEffectOnActive } from "keepalive-for-react"
 import { useNavigate } from "react-router-dom"
@@ -56,11 +57,13 @@ const Index = () => {
           <Button
             key={lang}
             variant="contained"
-            onClick={() =>
-              void changeLanguage(lang, () => {
+            startIcon={<Translate />}
+            endIcon={<Language />}
+            onClick={() => {
+              changeLanguage(lang, () => {
                 console.log("changeLanguage", lang)
               })
-            }
+            }}
           >
             {displayLang}
           </Button>

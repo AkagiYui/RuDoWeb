@@ -30,6 +30,7 @@ module.exports = {
     "@typescript-eslint/no-non-null-assertion": "off", // 禁止非空断言
     "@typescript-eslint/no-unsafe-assignment": "warn", // 禁止不安全的赋值
     "@typescript-eslint/restrict-template-expressions": "off", // 限制模板表达式
+    "@typescript-eslint/no-confusing-void-expression": "off", // 禁止混淆void表达式
 
     "simple-import-sort/exports": "error", // 排序导出
     "simple-import-sort/imports": ["error", {

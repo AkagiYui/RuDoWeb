@@ -23,9 +23,11 @@ const [displayLangs, resources] = Object.entries(langs).reduce<[Record<string, s
 console.log("displayLangs", displayLangs)
 console.log("resources", resources)
 
+const LANGUAGE_KEY = "user_language"
+
 void i18n.use(initReactI18next).init({
   resources,
-  lng: "zhCN",
+  lng: localStorage.getItem(LANGUAGE_KEY) || "zhCN",
   fallbackLng: "en",
   interpolation: {
     escapeValue: false,
@@ -36,8 +38,18 @@ const useI18n = () => {
   const { t } = useTranslation()
   return {
     t,
+    currentLanguage: i18n.language,
     allLanguages: displayLangs,
-    changeLanguage: i18n.changeLanguage.bind(i18n),
+    changeLanguage: (lang: string, cb?: () => void) => {
+      void i18n.changeLanguage(lang, (err) => {
+        if (err) {
+          console.error("changeLanguage", err)
+        } else {
+          localStorage.setItem(LANGUAGE_KEY, lang)
+          cb?.()
+        }
+      })
+    }
   }
 }
 
