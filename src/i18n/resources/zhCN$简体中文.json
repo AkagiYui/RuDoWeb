@@ -8,5 +8,12 @@
   "Menu": {
     "Home": "待办清单",
     "About": "关于"
+  },
+  "MainList": {
+    "addTodo": "输入待办事项",
+    "add": "添加"
+  },
+  "About": {
+    "back": "返回"
   }
 }
