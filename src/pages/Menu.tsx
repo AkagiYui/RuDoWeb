@@ -1,5 +1,4 @@
-import MailIcon from "@mui/icons-material/Mail"
-import InboxIcon from "@mui/icons-material/MoveToInbox"
+import { ChecklistRtl, Info } from "@mui/icons-material"
 import { Toolbar } from "@mui/material"
 import Box from "@mui/material/Box"
 import Divider from "@mui/material/Divider"
@@ -10,38 +9,33 @@ import ListItemButton from "@mui/material/ListItemButton"
 import ListItemIcon from "@mui/material/ListItemIcon"
 import ListItemText from "@mui/material/ListItemText"
 import React from "react"
+import { useNavigate } from "react-router-dom"
 
 import { useScreenWidth } from "@/hooks"
+import { useI18n } from "@/i18n"
 import { useDrawerState } from "@/stores"
 
 type MenuItem = {
-  text: string
+  textKey: string // Changed from 'text' to 'textKey' for i18n
   icon: React.ReactNode
-  onClick: () => void // 新增: 为每个菜单项添加点击回调
+  path?: string
 }
 
-const topMenuItems: MenuItem[] = [
-  { text: "Inbox", icon: <InboxIcon />, onClick: () => console.log("Inbox clicked") },
-  { text: "Starred", icon: <MailIcon />, onClick: () => console.log("Starred clicked") },
-  { text: "Send email", icon: <InboxIcon />, onClick: () => console.log("Send email clicked") },
-  { text: "Drafts", icon: <MailIcon />, onClick: () => console.log("Drafts clicked") },
-]
+const topMenuItems: MenuItem[] = [{ textKey: "Home", icon: <ChecklistRtl />, path: "/" }]
 
-const bottomMenuItems: MenuItem[] = [
-  { text: "All mail", icon: <InboxIcon />, onClick: () => console.log("All mail clicked") },
-  { text: "Trash", icon: <MailIcon />, onClick: () => console.log("Trash clicked") },
-  { text: "Spam", icon: <InboxIcon />, onClick: () => console.log("Spam clicked") },
-]
+const bottomMenuItems: MenuItem[] = [{ textKey: "About", icon: <Info />, path: "/about" }]
 
-const MenuList: React.FC<{ items: MenuItem[] }> = ({ items }) => (
+const MenuList: React.FC<{
+  items: MenuItem[]
+  onItemClick: (item: MenuItem) => void
+  t: (key: string) => string // Added t function as a prop
+}> = ({ items, onItemClick, t }) => (
   <List>
     {items.map((item) => (
-      <ListItem key={item.text} disablePadding>
-        <ListItemButton onClick={item.onClick}>
-          {" "}
-          {/* 修改: 添加onClick处理 */}
+      <ListItem key={item.textKey} disablePadding>
+        <ListItemButton onClick={() => onItemClick(item)}>
           <ListItemIcon>{item.icon}</ListItemIcon>
-          <ListItemText primary={item.text} />
+          <ListItemText primary={t(item.textKey)} />
         </ListItemButton>
       </ListItem>
     ))}
@@ -51,10 +45,16 @@ const MenuList: React.FC<{ items: MenuItem[] }> = ({ items }) => (
 export default function Menu() {
   const [drawerState, toggleDrawer] = useDrawerState()
   const { isSmall } = useScreenWidth()
+  const navigate = useNavigate()
+  const { t } = useI18n("Menu")
 
-  const handleItemClick = (callback: () => void) => {
-    callback()
-    toggleDrawer(false) // 点击后关闭抽屉
+  const handleItemClick = (item: MenuItem) => {
+    if (item.path) {
+      navigate(item.path)
+    } else {
+      console.log(`${t(item.textKey)} clicked`)
+    }
+    toggleDrawer(false)
   }
 
   const DrawerContent = (
@@ -68,31 +68,17 @@ export default function Menu() {
       role="presentation"
     >
       <Box sx={{ flexGrow: 1, overflowY: "auto" }}>
-        <MenuList
-          items={topMenuItems.map((item) => ({
-            ...item,
-            onClick: () => {
-              handleItemClick(item.onClick)
-            },
-          }))}
-        />
+        <MenuList items={topMenuItems} onItemClick={handleItemClick} t={t} />
       </Box>
       <Divider />
       <Box>
-        <MenuList
-          items={bottomMenuItems.map((item) => ({
-            ...item,
-            onClick: () => {
-              handleItemClick(item.onClick)
-            },
-          }))}
-        />
+        <MenuList items={bottomMenuItems} onItemClick={handleItemClick} t={t} />
       </Box>
     </Box>
   )
 
   return (
-    <Drawer anchor={isSmall ? "top" : "left"} open={drawerState} onClose={() => toggleDrawer()}>
+    <Drawer anchor={isSmall ? "top" : "left"} open={drawerState} onClose={() => toggleDrawer(false)}>
       {!isSmall && <Toolbar />}
       {DrawerContent}
     </Drawer>

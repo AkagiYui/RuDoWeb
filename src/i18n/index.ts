@@ -14,14 +14,14 @@ const [displayLangs, resources] = Object.entries(langs).reduce<[Record<string, s
     const [lang, display] = key.match(/\.\/resources\/(.+)\.json/)![1].split("$")
     return [
       { ...displayAcc, [lang]: display || lang },
-      { ...resourceAcc, [lang]: { translation: value } },
+      { ...resourceAcc, [lang]: value },
     ]
   },
   [{}, {}],
 )
 
-console.log("displayLangs", displayLangs)
-console.log("resources", resources)
+console.debug("displayLangs", displayLangs)
+console.debug("resources", resources)
 
 const LANGUAGE_KEY = "user_language"
 
@@ -34,8 +34,8 @@ void i18n.use(initReactI18next).init({
   },
 })
 
-const useI18n = () => {
-  const { t } = useTranslation()
+const useI18n = (namespace?: string) => {
+  const { t } = useTranslation(namespace)
   return {
     t,
     currentLanguage: i18n.language,

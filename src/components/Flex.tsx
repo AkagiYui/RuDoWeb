@@ -1,7 +1,7 @@
 import React, { CSSProperties } from "react"
 
 type FlexProps = {
-  children: React.ReactNode
+  children?: React.ReactNode
   vertical?: boolean
   justify?: "flex-start" | "center" | "flex-end" | "space-between" | "space-around"
   align?: "flex-start" | "center" | "flex-end" | "stretch"

@@ -1,4 +1,4 @@
-import { Translate } from "@mui/icons-material"
+import { GitHub, Translate } from "@mui/icons-material"
 import MenuIcon from "@mui/icons-material/Menu"
 import AppBar from "@mui/material/AppBar"
 import IconButton from "@mui/material/IconButton"
@@ -8,6 +8,7 @@ import Toolbar from "@mui/material/Toolbar"
 import Typography from "@mui/material/Typography"
 import React, { useState } from "react"
 
+import Flex from "@/components/Flex"
 import { useScreenWidth } from "@/hooks"
 import { useI18n } from "@/i18n"
 import { useDrawerState } from "@/stores"
@@ -15,7 +16,7 @@ import { useDrawerState } from "@/stores"
 export default function Header() {
   const [, toggleDrawer] = useDrawerState()
   const { isSmall } = useScreenWidth()
-  const { t, changeLanguage, allLanguages, currentLanguage } = useI18n()
+  const { t, changeLanguage, allLanguages, currentLanguage } = useI18n("Header")
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
@@ -52,17 +53,30 @@ export default function Header() {
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          RuDo
+          {t("title")}
         </Typography>
-        <IconButton
-          color="inherit"
-          onClick={handleClick}
-          aria-controls={open ? "language-menu" : undefined}
-          aria-haspopup="true"
-          aria-expanded={open ? "true" : undefined}
-        >
-          <Translate />
-        </IconButton>
+
+        <Flex>
+          {/* GitHub仓库按钮 */}
+          <IconButton
+            color="inherit"
+            onClick={() => {
+              window.open("https://github.com/AkagiYui/RuDoWeb", "_blank")
+            }}
+          >
+            <GitHub />
+          </IconButton>
+
+          <IconButton
+            color="inherit"
+            onClick={handleClick}
+            aria-controls={open ? "language-menu" : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? "true" : undefined}
+          >
+            <Translate />
+          </IconButton>
+        </Flex>
         <Menu id="language-menu" anchorEl={anchorEl} open={open} onClose={handleClose}>
           {Object.entries(allLanguages).map(([code, name]) => (
             <MenuItem key={code} onClick={() => handleLanguageChange(code)} selected={code === currentLanguage}>

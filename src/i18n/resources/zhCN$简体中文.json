@@ -1,3 +1,12 @@
 {
-  "hw": "你好，世界！"
+  "translation": {
+    "hw": "你好，世界"
+  },
+  "Header": {
+    "title": "如做"
+  },
+  "Menu": {
+    "Home": "待办清单",
+    "About": "关于"
+  }
 }
