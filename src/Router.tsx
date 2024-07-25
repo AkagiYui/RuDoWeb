@@ -19,8 +19,8 @@
  * - [ ] pages/user/[id].tsx => /user/:id
  * - [ ] pages/user/[id]/profile.tsx => /user/:id/profile
  */
-import { ComponentType } from "react"
-import { createBrowserRouter, RouteObject, RouterProvider } from "react-router-dom"
+import { ComponentType, useEffect } from "react"
+import { createBrowserRouter, RouteObject, RouterProvider, useMatches } from "react-router-dom"
 
 import { set, wrapSuspense } from "./utils"
 
@@ -134,5 +134,10 @@ function generateRouteConfig(): RouteObject[] {
 const router = createBrowserRouter(generateRouteConfig())
 
 export default function Router() {
+  // const matches = useMatches()
+  // useEffect(() => {
+  //   console.log("matches", matches)
+  // }, [matches])
+
   return <RouterProvider router={router} />
 }
