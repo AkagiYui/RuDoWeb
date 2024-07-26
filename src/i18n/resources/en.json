@@ -3,7 +3,9 @@
     "hw": "Hello, world"
   },
   "Header": {
-    "title": "RuDo"
+    "title": "RuDo",
+    "Language.en": "🇬🇧English",
+    "Language.zh-CN": "🇨🇳简体中文"
   },
   "Menu": {
     "Home": "ToDo",
@@ -15,5 +17,9 @@
   },
   "About": {
     "back": "Back"
+  },
+  "DetailDrawer": {
+    "Title": "Title",
+    "Created At": "Created At"
   }
 }

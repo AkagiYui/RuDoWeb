@@ -2,7 +2,7 @@ import { useCallback } from "react"
 
 import { useSharedState } from "@/hooks"
 
-class ToDoItem {
+export class ToDoItem {
   id: string
   createDate: string
   constructor(

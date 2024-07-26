@@ -3,7 +3,9 @@
     "hw": "你好，世界"
   },
   "Header": {
-    "title": "如做"
+    "title": "如做",
+    "Language.en": "🇬🇧English",
+    "Language.zh-CN": "🇨🇳简体中文"
   },
   "Menu": {
     "Home": "待办清单",
@@ -15,5 +17,9 @@
   },
   "About": {
     "back": "返回"
+  },
+  "DetailDrawer": {
+    "Title": "详情",
+    "Created At": "创建时间"
   }
 }

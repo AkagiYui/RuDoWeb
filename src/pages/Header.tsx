@@ -16,7 +16,8 @@ import { useDrawerState } from "@/stores"
 export default function Header() {
   const [, toggleDrawer] = useDrawerState()
   const { isSmall } = useScreenWidth()
-  const { t, changeLanguage, allLanguages, currentLanguage } = useI18n("Header")
+  const { t, changeLanguage, allLanguages: raw, currentLanguage } = useI18n("Header")
+  const allLanguages: Record<string, string> = Object.fromEntries(raw.map((lang) => [lang, t(`Language.${lang}`)]))
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)

@@ -11,14 +11,17 @@ import ListItemIcon from "@mui/material/ListItemIcon"
 import ListItemText from "@mui/material/ListItemText"
 import TextField from "@mui/material/TextField"
 import { useEffectOnActive } from "keepalive-for-react"
-import React, { useState } from "react"
+import { useState } from "react"
 
-import Flex from "@/components/Flex"
 import { useI18n } from "@/i18n"
-import { useCount, useToDoList } from "@/stores"
+import { ToDoItem, useToDoList } from "@/stores"
+
+import TodoDrawer from "./DetailDrawer"
 
 const Index = () => {
   const [newTodo, setNewTodo] = useState("")
+  const [drawerOpen, setDrawerOpen] = useState(false)
+  const [selectedItem, setSelectedItem] = useState<ToDoItem | null>(null)
 
   useEffectOnActive(
     (active) => {
@@ -38,8 +41,13 @@ const Index = () => {
     }
   }
 
+  const handleItemClick = (item: ToDoItem) => {
+    setSelectedItem(item)
+    setDrawerOpen(true)
+  }
+
   return (
-    <div style={{ display: "flex", flexDirection: "column", height: "100vh", width: "100%" }}>
+    <div style={{ display: "flex", flexDirection: "column", height: "100vh" }}>
       <List style={{ flex: 1, overflowY: "auto" }}>
         {toDoItems.map((item) => (
           <ListItem
@@ -52,14 +60,17 @@ const Index = () => {
               </IconButton>
             }
           >
-            <ListItemButton role={undefined} dense style={{ width: "100%" }}>
+            <ListItemButton role={undefined} dense style={{ width: "100%" }} onClick={() => handleItemClick(item)}>
               <ListItemIcon>
                 <Checkbox
                   edge="start"
                   checked={item.done}
                   tabIndex={-1}
                   disableRipple
-                  onClick={() => toggleToDoItem(item.id)}
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    toggleToDoItem(item.id)
+                  }}
                 />
               </ListItemIcon>
               <ListItemText primary={item.title} />
@@ -86,6 +97,12 @@ const Index = () => {
           </Button>
         )}
       </div>
+      <TodoDrawer
+        open={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+        onOpen={() => {}}
+        selectedItem={selectedItem}
+      />
     </div>
   )
 }

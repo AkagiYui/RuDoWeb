@@ -9,15 +9,15 @@ type LanguageFiles = Record<string, Translation>
 const langs = import.meta.glob<LanguageFiles>(["./resources/*.json"], { eager: true })
 
 // 提取语言代码和显示名称
-const [displayLangs, resources] = Object.entries(langs).reduce<[Record<string, string>, LanguageFiles]>(
+const [displayLangs, resources] = Object.entries(langs).reduce<[string[], LanguageFiles]>(
   ([displayAcc, resourceAcc], [key, value]) => {
-    const [lang, display] = key.match(/\.\/resources\/(.+)\.json/)![1].split("$")
+    const lang = key.match(/\.\/resources\/(.+)\.json/)![1]
     return [
-      { ...displayAcc, [lang]: display || lang },
+      [ ...displayAcc, lang ],
       { ...resourceAcc, [lang]: value },
     ]
   },
-  [{}, {}],
+  [[], {}],
 )
 
 console.debug("displayLangs", displayLangs)
