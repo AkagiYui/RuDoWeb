@@ -5,7 +5,8 @@
   "Header": {
     "title": "RuDo",
     "Language.en": "🇬🇧English",
-    "Language.zh-CN": "🇨🇳简体中文"
+    "Language.zh-CN": "🇨🇳简体中文",
+    "search": "Search"
   },
   "Menu": {
     "Home": "ToDo",

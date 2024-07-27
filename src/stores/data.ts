@@ -60,11 +60,13 @@ export const useToDoList = () => {
   }, [toDoItems, setToDoItems])
 
   return {
-    toDoItems,
+    toDoItems: toDoItems.filter((item) => item.title.includes(filterText)),
     doneItems,
     unDoneItems,
     addToDoItem,
     toggleToDoItem,
     removeToDoItem,
+    filterText,
+    setFilter,
   }
 }
