@@ -27,8 +27,8 @@ const LANGUAGE_KEY = "user_language"
 
 void i18n.use(initReactI18next).init({
   resources,
-  lng: localStorage.getItem(LANGUAGE_KEY) || "zhCN",
-  fallbackLng: "en",
+  lng: localStorage.getItem(LANGUAGE_KEY) || "zh-CN",
+  fallbackLng: "zh-CN",
   interpolation: {
     escapeValue: false,
   },
