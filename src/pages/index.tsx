@@ -22,6 +22,8 @@ const Index = () => {
   const [newTodo, setNewTodo] = useState("")
   const [drawerOpen, setDrawerOpen] = useState(false)
   const [selectedItem, setSelectedItem] = useState<ToDoItem | null>(null)
+  const { t } = useI18n("MainList")
+  const { toDoItems, doneItems, unDoneItems, addToDoItem, toggleToDoItem, removeToDoItem } = useToDoList()
 
   useEffectOnActive(
     (active) => {
@@ -30,9 +32,6 @@ const Index = () => {
     false,
     [],
   )
-
-  const { t } = useI18n("MainList")
-  const { toDoItems, doneItems, unDoneItems, addToDoItem, toggleToDoItem, removeToDoItem } = useToDoList()
 
   const handleAddTodo = () => {
     if (newTodo.trim() !== "") {
@@ -47,38 +46,64 @@ const Index = () => {
   }
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", height: "100vh" }}>
-      <List style={{ flex: 1, overflowY: "auto" }}>
-        {toDoItems.map((item) => (
-          <ListItem
-            key={item.id}
-            disablePadding
-            style={{ width: "100%" }}
-            secondaryAction={
-              <IconButton edge="end" aria-label="delete" onClick={() => removeToDoItem(item.id)}>
-                <Delete />
-              </IconButton>
-            }
-          >
-            <ListItemButton role={undefined} dense style={{ width: "100%" }} onClick={() => handleItemClick(item)}>
-              <ListItemIcon>
-                <Checkbox
-                  edge="start"
-                  checked={item.done}
-                  tabIndex={-1}
-                  disableRipple
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    toggleToDoItem(item.id)
-                  }}
-                />
-              </ListItemIcon>
-              <ListItemText primary={item.title} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <div style={{ display: "flex", padding: "10px", position: "sticky", bottom: 0, backgroundColor: "white" }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        overflow: "hidden",
+      }}
+    >
+      <div
+        style={{
+          flex: 1,
+          overflowY: "auto",
+          paddingBottom: "60px", // Add padding to account for the input field
+        }}
+      >
+        <List>
+          {toDoItems.map((item) => (
+            <ListItem
+              key={item.id}
+              disablePadding
+              style={{ width: "100%" }}
+              secondaryAction={
+                <IconButton edge="end" aria-label="delete" onClick={() => removeToDoItem(item.id)}>
+                  <Delete />
+                </IconButton>
+              }
+            >
+              <ListItemButton role={undefined} dense style={{ width: "100%" }} onClick={() => handleItemClick(item)}>
+                <ListItemIcon>
+                  <Checkbox
+                    edge="start"
+                    checked={item.done}
+                    tabIndex={-1}
+                    disableRipple
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      toggleToDoItem(item.id)
+                    }}
+                  />
+                </ListItemIcon>
+                <ListItemText primary={item.title} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+      </div>
+      <div
+        style={{
+          position: "fixed",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          padding: "10px",
+          backgroundColor: "white",
+          boxShadow: "0px -2px 4px rgba(0, 0, 0, 0.1)",
+          display: "flex",
+        }}
+      >
         <TextField
           fullWidth
           value={newTodo}

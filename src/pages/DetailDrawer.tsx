@@ -22,7 +22,7 @@ const DetailDrawer: React.FC<DetailDrawerProps> = ({ open, onClose, onOpen, sele
     <div>
       <SwipeableDrawer anchor={isSmall ? "bottom" : "right"} open={open} onClose={onClose} onOpen={onOpen}>
         {!isSmall && <Toolbar />}
-        <List>
+        <List style={isSmall ? {} : { width: 250, padding: 10 }}>
           {selectedItem && (
             <>
               <ListItem>
